@@ -37,9 +37,9 @@ public class NicePlugin extends CordovaPlugin {
         if(!isInstalledApplication()){
           // 팝업 메시지로 "앱카드가 설치되어 있지 않습니다. 설치 페이지로 이동합니다." 안내 후
           // 구글플레이 다운로드 URL(market://details?id=com.nice.appcard)로 이동
-          Toast.makeText(getApplicationContext(), noInstallMsg, Toast.LENGTH_SHORT).show();
+          
           Context context=cordova.getActivity().getApplicationContext();
-
+          Toast.makeText(context, noInstallMsg, Toast.LENGTH_SHORT).show();
           Intent intent = new Intent(Intent.ACTION_VIEW);
           intent.addCategory(Intent.CATEGORY_DEFAULT);
           intent.setData(Uri.parse("market://details?id=com.nice.appcard"));
