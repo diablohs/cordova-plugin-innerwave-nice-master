@@ -22,5 +22,6 @@
 		</config-file>
 		<config-file parent="/*" target="AndroidManifest.xml"></config-file>
 		<source-file src="src/android/NicePlugin.java" target-dir="src/com/innerwave/nice/NicePlugin" />
+        <source-file src="src/android/NEncrypter.java" target-dir="src/com/innerwave/nice/NEncrypter" />
 	</platform>
 </plugin>
