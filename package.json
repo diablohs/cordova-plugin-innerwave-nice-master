@@ -1,0 +1,19 @@
+{
+  "name": "com.innerwave.nice",
+  "version": "1.0.0",
+  "description": "Nice van plugin",
+  "cordova": {
+    "id": "com.innerwave.nice",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "author": "innerwave",
+  "license": "MIT"
+}

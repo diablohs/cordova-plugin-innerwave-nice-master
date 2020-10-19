@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.innerwave.nice" version="1.0.0"
+	xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>NicePlugin</name>
+	<js-module name="NicePlugin" src="www/NicePlugin.js">
+		<clobbers target="cordova.plugins.NicePlugin" />
+	</js-module>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="NicePlugin">
+				<param name="ios-package" value="NicePlugin" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/NicePlugin.m" />
+	</platform>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="NicePlugin">
+				<param name="android-package" value="com.innerwave.nice.NicePlugin" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml"></config-file>
+		<source-file src="src/android/NicePlugin.java" target-dir="src/com/innerwave/nice/NicePlugin" />
+	</platform>
+</plugin>
