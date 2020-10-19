@@ -21,7 +21,7 @@ public class NicePlugin extends CordovaPlugin {
     
     //해당 패키지 명으로 검색하여 설치되어 있으면 true, 아니면 false를 리턴한다.
     private boolean isInstalledApplication() {
-    	PackageManager pm = getPackageManager();
+    	PackageManager pm = cordova.getActivity().getPackageManager();
     	try {
     	    pm.getApplicationInfo(APPCARD_PKG, PackageManager.GET_META_DATA);
     	} catch(NameNotFoundException e) {
