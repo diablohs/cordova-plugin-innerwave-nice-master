@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="com.innerwave.nice" version="1.0.0"
+<plugin id="cordova-plugin-innerwave-nice" version="1.0.0"
 	xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>NicePlugin</name>
 	<js-module name="NicePlugin" src="www/NicePlugin.js">
-		<clobbers target="cordova.plugins.NicePlugin" />
+		<clobbers target="NicePlugin" />
 	</js-module>
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
