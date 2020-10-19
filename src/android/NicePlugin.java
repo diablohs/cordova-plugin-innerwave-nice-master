@@ -38,7 +38,7 @@ public class NicePlugin extends CordovaPlugin {
           // 구글플레이 다운로드 URL(market://details?id=com.nice.appcard)로 이동
           Context context=cordova.getActivity().getApplicationContext();
 
-          Intent intent = new Intent(context, Intent.ACTION_VIEW);
+          Intent intent = new Intent(Intent.ACTION_VIEW);
           intent.addCategory(Intent.CATEGORY_DEFAULT);
           intent.setData(Uri.parse("market://details?id=com.nice.appcard"));
           context.startActivity(intent);
