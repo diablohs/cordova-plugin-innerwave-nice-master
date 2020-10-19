@@ -41,11 +41,10 @@ public class NicePlugin extends CordovaPlugin {
           Intent intent = new Intent(Intent.ACTION_VIEW);
           intent.addCategory(Intent.CATEGORY_DEFAULT);
           intent.setData(Uri.parse("market://details?id=com.nice.appcard"));
-          context.startActivity(intent);
+          cordova.getActivity().startActivity(intent);
 
-          return false;
-        }
-        if (action.equals("callPayment")) {
+          return true;
+        }else if (action.equals("callPayment")) {
             String message = args.getString(0);
             this.callPayment(message, callbackContext);
             return true;
