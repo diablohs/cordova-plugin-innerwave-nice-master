@@ -21,6 +21,7 @@ public class NicePlugin extends CordovaPlugin {
     private final static String APPCARD_PKG = "com.nice.appcard";
     private final String encryptKey = "영업 담당자를 통해 전달받은 암호키";
     private final String noInstallMsg = "앱카드가 설치되어 있지 않습니다. 설치 페이지로 이동합니다.";
+    private CallbackContext callbackContext;
     //해당 패키지 명으로 검색하여 설치되어 있으면 true, 아니면 false를 리턴한다.
     private boolean isInstalledApplication() {
     	PackageManager pm = cordova.getActivity().getPackageManager();
@@ -56,6 +57,7 @@ public class NicePlugin extends CordovaPlugin {
     }
 
     private void callPayment(String message, CallbackContext callbackContext) {
+        this.callbackContext = callbackContext;
         if (message != null && message.length() > 0) {
             cordova.setActivityResultCallback (this);
 
@@ -85,9 +87,9 @@ public class NicePlugin extends CordovaPlugin {
             String card_comp_code = data.getStringExtra("CARD_COMP_CODE");
             String id_cd = data.getStringExtra("ID_CD");
 
-            callbackContext.success(message+" world");
+            this.callbackContext.success(message+" world");
         }else{
-            callbackContext.error("Error.");
+            this.callbackContext.error("Error.");
         }
     }
 }
