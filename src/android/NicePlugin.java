@@ -18,7 +18,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
  */
 public class NicePlugin extends CordovaPlugin {
     private final static String APPCARD_PKG = "com.nice.appcard";
-    
+    private final String noInstallMsg = "앱카드가 설치되어 있지 않습니다. 설치 페이지로 이동합니다.";
     //해당 패키지 명으로 검색하여 설치되어 있으면 true, 아니면 false를 리턴한다.
     private boolean isInstalledApplication() {
     	PackageManager pm = cordova.getActivity().getPackageManager();
@@ -36,6 +36,7 @@ public class NicePlugin extends CordovaPlugin {
         if(!isInstalledApplication()){
           // 팝업 메시지로 "앱카드가 설치되어 있지 않습니다. 설치 페이지로 이동합니다." 안내 후
           // 구글플레이 다운로드 URL(market://details?id=com.nice.appcard)로 이동
+          Toast.makeText(getApplicationContext(), noInstallMsg, Toast.LENGTH_SHORT).show();
           Context context=cordova.getActivity().getApplicationContext();
 
           Intent intent = new Intent(Intent.ACTION_VIEW);
