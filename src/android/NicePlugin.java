@@ -111,11 +111,11 @@ public class NicePlugin extends CordovaPlugin {
 
         JSONObject json = new JSONObject();
 
-        if(requestCode == 100){            
-            String otc = data.getStringExtra("OTC");
-            String memberId = data.getStringExtra("MEMBER_ID");
-            String cardCompCode = data.getStringExtra("CARD_COMP_CODE");
-            String idCd = data.getStringExtra("ID_CD");
+        if(requestCode == 100){   
+            String otc = data.getStringExtra("OTC") == null ? "" : data.getStringExtra("OTC");
+            String memberId = data.getStringExtra("MEMBER_ID")  == null ? "" : data.getStringExtra("MEMBER_ID");
+            String cardCompCode = data.getStringExtra("CARD_COMP_CODE")  == null ? "" : data.getStringExtra("CARD_COMP_CODE");
+            String idCd = data.getStringExtra("ID_CD")  == null ? "" : data.getStringExtra("ID_CD");
 
             try {
                 json.put("resultCode", resultCode);
