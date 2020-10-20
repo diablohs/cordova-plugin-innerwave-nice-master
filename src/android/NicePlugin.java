@@ -66,22 +66,23 @@ public class NicePlugin extends CordovaPlugin {
 
             try {
                 json = new JSONObject(message);
+
+                String callStrEnc = "niceappcard://payment?partner_cd=%s"
+                +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s";
+                String partnerCd = json.getString("partnerCd");
+                String partnerId = NEncrypter.encryptString(encryptKey, json.getString("partnerId"));
+                String merchantCd = NEncrypter.encryptString(encryptKey, json.getString("merchantCd"));
+                String payPrice = json.getString("payPrice");
+                String h = NEncrypter.sha256(partnerCd + partnerId);
+
+                callStrEnc = String.format(callStrEnc, partnerCd, partnerId, merchantCd, payPrice, h);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(callStrEnc));
+                cordova.startActivityForResult(this, intent, 100);            
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.e("NicePlugin", e.toString());
-            }
-
-            String callStrEnc = "niceappcard://payment?partner_cd=%s"
-            +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s";
-            String partnerCd = json.getString("partnerCd");
-            String partnerId = NEncrypter.encryptString(encryptKey, json.getString("partnerId"));
-            String merchantCd = NEncrypter.encryptString(encryptKey, json.getString("merchantCd"));
-            String payPrice = json.getString("payPrice");
-            String h = NEncrypter.sha256(partnerCd + partnerId);
-
-            callStrEnc = String.format(callStrEnc, partnerCd, partnerId, merchantCd, payPrice, h);
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(callStrEnc));
-            cordova.startActivityForResult(this, intent, 100);            
+                callbackContext.error(e.toString());
+            }            
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
