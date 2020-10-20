@@ -80,14 +80,43 @@ public class NicePlugin extends CordovaPlugin {
     //응답 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        /*
+        -1	success	성공
+        0	사용자가 취소하였습니다.	정상 화면에서 사용자 취소
+        400	파라미터 요청이 올바르지 않습니다.	필수 파라미터 오류.
+        405	"네트워크 연결이 되지 않았습니다.
+        잠시 후 다시 이용해 주세요."	네트워크 연결 실패
+        801	카드 등록 실패하였습니다.	카드 등록 실패
+        802	카드 삭제 실패하였습니다.	카드 삭제 실패
+        803	PIN 입력 초과 오류입니다.	PIN 입력 초과 오류
+        812	중계시스템 오류입니다.	"DB, 세션 등 중계시스템 오류
+        개발 진행 상황에서 발생"
+        813	루팅된 기기를 사용중입니다. 루팅된 기기로 앱을 실행할 수 없습니다.	루팅 디바이스
+        815	악성코드가 발견 되었습니다	악성코드 발견시 
+        201	앱 강제 업데이트를 실행하였습니다.	앱 업데이트 진행
+        202	시스템 점검 중입니다.	시스템 점검
+        */
         if(requestCode == 100){
+            StringBuffer sb = new StringBuffer();
             String otc = data.getStringExtra("OTC");
             String member_id = data.getStringExtra("MEMBER_ID");
             String card_comp_code = data.getStringExtra("CARD_COMP_CODE");
             String id_cd = data.getStringExtra("ID_CD");
 
-            this.callbackContext.success(message+" world");
+            sb.setLength(0);
+            sb.append("{");
+            sb.append("\"resultCode\":\""+resultCode+"\"");
+            sb.append(",");
+            sb.append("\"otc\":\""+otc+"\"");
+            sb.append(",");
+            sb.append("\"memberId\":\""+member_id+"\"");
+            sb.append(",");
+            sb.append("\"cardCompCode\":\""+card_comp_code+"\"");
+            sb.append(",");
+            sb.append("\"idCd\":\""+id_cd+"\"");
+            sb.append("}");
+            this.callbackContext.success(sb.toString());
         }else{
             this.callbackContext.error("Error.");
         }
