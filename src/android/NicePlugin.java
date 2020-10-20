@@ -21,7 +21,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
  */
 public class NicePlugin extends CordovaPlugin {
     private final static String APPCARD_PKG = "com.nice.appcard";
-    private final String encryptKey = "영업 담당자를 통해 전달받은 암호키";
     private final String noInstallMsg = "앱카드가 설치되어 있지 않습니다. 설치 페이지로 이동합니다.";
     private CallbackContext callbackContext;
     //해당 패키지 명으로 검색하여 설치되어 있으면 true, 아니면 false를 리턴한다.
@@ -69,6 +68,7 @@ public class NicePlugin extends CordovaPlugin {
 
                 String callStrEnc = "niceappcard://payment?partner_cd=%s"
                 +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s";
+                String encryptKey = json.getString("encryptKey");
                 String partnerCd = json.getString("partnerCd");
                 String partnerId = NEncrypter.encryptString(encryptKey, json.getString("partnerId"));
                 String merchantCd = NEncrypter.encryptString(encryptKey, json.getString("merchantCd"));
