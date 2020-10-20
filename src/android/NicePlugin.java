@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
@@ -63,13 +65,13 @@ public class NicePlugin extends CordovaPlugin {
 
             String callStrEnc = "niceappcard://payment?partner_cd=%s"
             +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s";
-            String partner_cd = "NICE002";
-            String partner_id = "";//NEncrypter.encryptString(encryptKey, "NICE002");
-            String merchant_cd = NEncrypter.encryptString(encryptKey, "220811577001");
+            String partnerCd = "NICE002";
+            String partnerId = "";//NEncrypter.encryptString(encryptKey, "NICE002");
+            String merchantCd = NEncrypter.encryptString(encryptKey, "220811577001");
             String payPrice = "100";
             String h = "";//SHA-256(partner_cd + partner_id)
 
-            callStrEnc = String.format(callStrEnc, partner_cd, partner_id, merchant_cd, payPrice, h);
+            callStrEnc = String.format(callStrEnc, partnerCd, partnerId, merchantCd, payPrice, h);
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(callStrEnc));
             cordova.startActivityForResult(this, intent, 100);            
         } else {
@@ -98,33 +100,34 @@ public class NicePlugin extends CordovaPlugin {
         202	시스템 점검 중입니다.	시스템 점검
         */
 
-        StringBuffer sb = new StringBuffer();
+        JSONObject json = new JSONObject();
 
         if(requestCode == 100){            
             String otc = data.getStringExtra("OTC");
-            String member_id = data.getStringExtra("MEMBER_ID");
-            String card_comp_code = data.getStringExtra("CARD_COMP_CODE");
-            String id_cd = data.getStringExtra("ID_CD");
+            String memberId = data.getStringExtra("MEMBER_ID");
+            String cardCompCode = data.getStringExtra("CARD_COMP_CODE");
+            String idCd = data.getStringExtra("ID_CD");
 
-            sb.setLength(0);
-            sb.append("{");
-            sb.append("\"resultCode\":\""+resultCode+"\"");
-            sb.append(",");
-            sb.append("\"otc\":\""+otc+"\"");
-            sb.append(",");
-            sb.append("\"memberId\":\""+member_id+"\"");
-            sb.append(",");
-            sb.append("\"cardCompCode\":\""+card_comp_code+"\"");
-            sb.append(",");
-            sb.append("\"idCd\":\""+id_cd+"\"");
-            sb.append("}");
-            this.callbackContext.success(sb.toString());
+            try {
+                json.put("resultCode", resultCode);
+                json.put("otc", otc);
+                json.put("memberId", memberId);
+                json.put("cardCompCode", cardCompCode);
+                json.put("idCd", idCd);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e("NicePlugin", e.toString());
+            }
+            
+            this.callbackContext.success(json.toString());
         }else{
-            sb.setLength(0);
-            sb.append("{");
-            sb.append("\"resultCode\":\""+resultCode+"\"");
-            sb.append("}");
-            this.callbackContext.error(sb.toString());
+            try {
+                json.put("resultCode", resultCode);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e("NicePlugin", e.toString());
+            }
+            this.callbackContext.error(json.toString());
         }
     }
 }
