@@ -77,19 +77,19 @@ public class NicePlugin extends CordovaPlugin {
         }
     }
 
-    // //응답 
-    // @Override
-    // protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    //     super.onActivityResult(requestCode, resultCode, data);
-    //     if(resultCode == RESULT_OK && requestCode == 100){
-    //         String otc = data.getStringExtra("OTC");
-    //         String member_id = data.getStringExtra("MEMBER_ID");
-    //         String card_comp_code = data.getStringExtra("CARD_COMP_CODE");
-    //         String id_cd = data.getStringExtra("ID_CD");
+    //응답 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100){
+            String otc = data.getStringExtra("OTC");
+            String member_id = data.getStringExtra("MEMBER_ID");
+            String card_comp_code = data.getStringExtra("CARD_COMP_CODE");
+            String id_cd = data.getStringExtra("ID_CD");
 
-    //         this.callbackContext.success(message+" world");
-    //     }else{
-    //         this.callbackContext.error("Error.");
-    //     }
-    // }
+            this.callbackContext.success(message+" world");
+        }else{
+            this.callbackContext.error("Error.");
+        }
+    }
 }
