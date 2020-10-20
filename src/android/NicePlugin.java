@@ -79,7 +79,7 @@ public class NicePlugin extends CordovaPlugin {
 
     //응답 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 100){
             String otc = data.getStringExtra("OTC");
