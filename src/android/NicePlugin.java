@@ -62,14 +62,22 @@ public class NicePlugin extends CordovaPlugin {
         this.callbackContext = callbackContext;
         if (message != null && message.length() > 0) {
             cordova.setActivityResultCallback (this);
+            JSONObject json = null;
+
+            try {
+                json = new JSONObject(message);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e("NicePlugin", e.toString());
+            }
 
             String callStrEnc = "niceappcard://payment?partner_cd=%s"
             +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s";
-            String partnerCd = "NICE002";
-            String partnerId = "";//NEncrypter.encryptString(encryptKey, "NICE002");
-            String merchantCd = NEncrypter.encryptString(encryptKey, "220811577001");
-            String payPrice = "100";
-            String h = "";//SHA-256(partner_cd + partner_id)
+            String partnerCd = json.getString("partnerCd");
+            String partnerId = NEncrypter.encryptString(encryptKey, json.getString("partnerId"));
+            String merchantCd = NEncrypter.encryptString(encryptKey, json.getString("merchantCd"));
+            String payPrice = json.getString("payPrice");
+            String h = NEncrypter.sha256(partnerCd + partnerId)
 
             callStrEnc = String.format(callStrEnc, partnerCd, partnerId, merchantCd, payPrice, h);
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(callStrEnc));
