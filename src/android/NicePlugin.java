@@ -90,7 +90,7 @@ public class NicePlugin extends CordovaPlugin {
     //응답 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
         /*
         -1	success	성공
         0	사용자가 취소하였습니다.	정상 화면에서 사용자 취소
@@ -110,7 +110,7 @@ public class NicePlugin extends CordovaPlugin {
 
         JSONObject json = new JSONObject();
 
-        if(requestCode == 100){   
+        if(resultCode == Activity.RESULT_OK&& requestCode == 100){   
             String otc = data.getStringExtra("OTC");
             String memberId = data.getStringExtra("MEMBER_ID");
             String cardCompCode = data.getStringExtra("CARD_COMP_CODE");
