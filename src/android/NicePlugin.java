@@ -97,8 +97,10 @@ public class NicePlugin extends CordovaPlugin {
         201	앱 강제 업데이트를 실행하였습니다.	앱 업데이트 진행
         202	시스템 점검 중입니다.	시스템 점검
         */
-        if(requestCode == 100){
-            StringBuffer sb = new StringBuffer();
+
+        StringBuffer sb = new StringBuffer();
+
+        if(requestCode == 100){            
             String otc = data.getStringExtra("OTC");
             String member_id = data.getStringExtra("MEMBER_ID");
             String card_comp_code = data.getStringExtra("CARD_COMP_CODE");
@@ -118,7 +120,11 @@ public class NicePlugin extends CordovaPlugin {
             sb.append("}");
             this.callbackContext.success(sb.toString());
         }else{
-            this.callbackContext.error("Error.");
+            sb.setLength(0);
+            sb.append("{");
+            sb.append("\"resultCode\":\""+resultCode+"\"");
+            sb.append("}");
+            this.callbackContext.error(sb.toString());
         }
     }
 }
