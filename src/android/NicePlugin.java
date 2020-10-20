@@ -29,7 +29,6 @@ public class NicePlugin extends CordovaPlugin {
     	try {
     	    pm.getApplicationInfo(APPCARD_PKG, PackageManager.GET_META_DATA);
     	} catch(NameNotFoundException e) {
-    		e.printStackTrace(); 	
     		return false;
     	}
     	return true;
@@ -60,7 +59,7 @@ public class NicePlugin extends CordovaPlugin {
     private void callPayment(String message, CallbackContext callbackContext) {
         this.callbackContext = callbackContext;
         if (message != null && message.length() > 0) {
-            cordova.setActivityResultCallback (this);
+            // cordova.setActivityResultCallback (this);
             JSONObject json = null;
 
             try {
@@ -91,7 +90,7 @@ public class NicePlugin extends CordovaPlugin {
     //응답 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
         /*
         -1	success	성공
         0	사용자가 취소하였습니다.	정상 화면에서 사용자 취소
@@ -112,10 +111,10 @@ public class NicePlugin extends CordovaPlugin {
         JSONObject json = new JSONObject();
 
         if(requestCode == 100){   
-            String otc = data.getStringExtra("OTC") == null ? "" : data.getStringExtra("OTC");
-            String memberId = data.getStringExtra("MEMBER_ID")  == null ? "" : data.getStringExtra("MEMBER_ID");
-            String cardCompCode = data.getStringExtra("CARD_COMP_CODE")  == null ? "" : data.getStringExtra("CARD_COMP_CODE");
-            String idCd = data.getStringExtra("ID_CD")  == null ? "" : data.getStringExtra("ID_CD");
+            String otc = data.getStringExtra("OTC");
+            String memberId = data.getStringExtra("MEMBER_ID");
+            String cardCompCode = data.getStringExtra("CARD_COMP_CODE");
+            String idCd = data.getStringExtra("ID_CD");
 
             try {
                 json.put("resultCode", resultCode);
