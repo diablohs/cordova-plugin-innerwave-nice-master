@@ -77,7 +77,7 @@ public class NicePlugin extends CordovaPlugin {
             String partnerId = NEncrypter.encryptString(encryptKey, json.getString("partnerId"));
             String merchantCd = NEncrypter.encryptString(encryptKey, json.getString("merchantCd"));
             String payPrice = json.getString("payPrice");
-            String h = NEncrypter.sha256(partnerCd + partnerId)
+            String h = NEncrypter.sha256(partnerCd + partnerId);
 
             callStrEnc = String.format(callStrEnc, partnerCd, partnerId, merchantCd, payPrice, h);
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(callStrEnc));
