@@ -25,7 +25,7 @@ static NicePlugin *nicePluginInstance;
     NSLog(@"nice앱 리턴 : %@", value[@"resultCode"]);
 
     if (value != nil && ([value[@"resultCode"]  isEqual: @"-1"] || [value[@"resultCode"]  isEqual: @"0000"])) {     //결제성공
-        NSMutableDictionary *tempDict = [[NSDictionary alloc] init];
+        NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
         [tempDict setValue:value[@"resultCode"] forKey:@"resultKey"];
         [tempDict setValue:value[@"OTC"] forKey:@"otc"];
         [tempDict setValue:value[@"MEMBER_ID"] forKey:@"memberId"];
