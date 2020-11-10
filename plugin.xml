@@ -13,6 +13,9 @@
 			</feature>
 		</config-file>
 		<source-file src="src/ios/NicePlugin.m" />
+        <source-file src="src/ios/NicePlugin.h" />
+        <source-file src="src/ios/AppDelegate+NicePlugin.m" />
+        <source-file src="src/ios/AppDelegate+NicePlugin.h" />
 	</platform>
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
