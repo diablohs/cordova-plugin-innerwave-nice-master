@@ -66,7 +66,7 @@ public class NicePlugin extends CordovaPlugin {
                 json = new JSONObject(message);
 
                 String callStrEnc = "niceappcard://payment?partner_cd=%s"
-                +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s";
+                +"&partner_id=%s&merchant_cd=%s&pay_order=A&payPrice=%s&h=%s&van_id=NICE";
                 String encryptKey = json.getString("encryptKey");
                 String partnerCd = json.getString("partnerCd");
                 String partnerId = NEncrypter.encryptString(encryptKey, json.getString("partnerId"));
