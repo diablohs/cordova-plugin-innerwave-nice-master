@@ -227,7 +227,7 @@ static NicePlugin *nicePluginInstance;
     //결제 가격
     NSString *payPrice = [dict objectForKey:@"payPrice"];
     //5만원 이상시 서명여부 pass_sign이 true이면 서명 안함
-    NSString *pass_sign = @"true";//@"false"
+    NSString *pass_sign = @"";//@"false"
     //결제앱 구분코드
     NSString *id_cd = @"01";
     //거래 일련번호
